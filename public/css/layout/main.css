@@ -1,8 +1,65 @@
-main {
-    flex: 1;
-    padding: var(--space-lg) var(--space-sm);
+@page {
+  margin: 10mm;
+}
 
-    @media (min-width: 768px) {
-        padding: var(--space-2xl) var(--space-lg);
-    }
+@media print {
+
+  header,
+  footer,
+  nav {
+    display: none;
+  }
+
+  .confirmation-actions {
+    display: none;
+  }
+
+  .next-steps,
+  .important-info {
+    display: none;
+  }
+
+  body {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  p, span, div, li, a, label {
+    font-size: 12px;
+  }
+
+  .confirmation-page {
+    column-count: 2;
+    column-gap: 10px;
+  }
+
+
+  .detail-card,
+  .passenger-info-card {
+    padding: 6px;
+    margin-bottom: 6px;
+  }
+
+  .detail-icon {
+    font-size: 15px;
+  }
+
+  .success-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  section,
+  .detail-card,
+  .passenger-info-card,
+  .passengers-info,
+  .booking-details,
+  .confirmation-header,
+  .booking-reference {
+    break-inside: avoid;
+    page-break-inside: avoid;   
+  }
+
+
 }
