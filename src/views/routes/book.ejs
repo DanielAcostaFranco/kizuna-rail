@@ -32,8 +32,8 @@
                                 <div class="ticket-header">
                                     <h3 class="ticket-name"><%= ticket.name %></h3>
                                     <div class="ticket-price">
-                                        <span class="price-symbol">¥</span>
-                                        <span class="price-amount"><%= Number(ticket.price).toLocaleString() %></span>
+                                        <span class="price-symbol">$</span>
+                                        <span class="price-amount"><%= yenToUsd(Number(ticket.price)).toFixed(2) %></span>
                                     </div>
                                 </div>
                                 
@@ -170,11 +170,11 @@
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Price per Ticket:</span>
-                    <span class="summary-value" id="pricePerTicket"><%= ticketOptions && ticketOptions[0] ? '¥' + Number(ticketOptions[0].price).toLocaleString() : '¥14,400' %></span>
+                    <span class="summary-value" id="pricePerTicket"><%= ticketOptions && ticketOptions[0] ? '$' + yenToUsd(Number(ticketOptions[0].price)).toFixed(2) : '$0.00' %></span>
                 </div>
                 <div class="summary-row total">
                     <span class="summary-label">Total Amount:</span>
-                    <span class="summary-value" id="totalAmount"><%= ticketOptions && ticketOptions[0] ? '¥' + Number(ticketOptions[0].price).toLocaleString() : '¥14,400' %></span>
+                    <span class="summary-value" id="totalAmount"><%= ticketOptions && ticketOptions[0] ? '$' + yenToUsd(Number(ticketOptions[0].price)).toFixed(2) : '$0.00' %></span>
                 </div>
             </div>
         </section>
@@ -202,12 +202,20 @@
     const pricePerTicket = document.getElementById('pricePerTicket');
     const totalAmount = document.getElementById('totalAmount');
 
+    const YEN_TO_USD_RATE = 0.0066; // same rate as helper
+
+    const formatUsd = (amount) => `$${amount.toFixed(2)}`;
+
     const updateSummary = () => {
-        passengerCountDisplay.textContent = passengerCount;
-        pricePerTicket.textContent = `¥${ticketPrice.toLocaleString()}`;
-        const total = ticketPrice * passengerCount;
-        totalAmount.textContent = `¥${total.toLocaleString()}`;
+    passengerCountDisplay.textContent = passengerCount;
+
+    const priceUsd = ticketPrice * YEN_TO_USD_RATE;
+    pricePerTicket.textContent = formatUsd(priceUsd);
+
+    const totalUsd = (ticketPrice * passengerCount) * YEN_TO_USD_RATE;
+    totalAmount.textContent = formatUsd(totalUsd);
     };
+
 
     const updatePassengerNumbers = () => {
         const cards = document.querySelectorAll('.passenger-card');
