@@ -11,11 +11,10 @@ const bookingPage = async (req, res) => {
     title: 'Book Trip',
     schedule,
     ticketOptions,
-    yenToUsd
+    yenToUsd //change to usd
   });
 };
 
-// ✅ ESTA FUNCIÓN FALTABA
 const processBookingRequest = async (req, res) => {
   const data = req.body;
 
@@ -24,5 +23,5 @@ const processBookingRequest = async (req, res) => {
   res.redirect(`/routes/confirmation/${confirmationNum}`);
 };
 
-// ✅ AHORA SÍ existe lo que exportas
+
 export { bookingPage, processBookingRequest };

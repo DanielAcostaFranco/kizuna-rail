@@ -1,22 +1,21 @@
-import { Router } from 'express';
 import { bookingPage, processBookingRequest } from './book.js';
 import confirmationPage from './confirm.js';
 import listRoutesPage from './list.js';
 import routeDetailsPage from './details.js';
+import { Router } from 'express';
 
 const router = Router();
 
-// 1) List all routes
+// List all routes
 router.get('/', listRoutesPage);
 
-// 2) Booking (más específico)
+// Route details page
+router.get('/:routeId', routeDetailsPage);
+// Book ticket
 router.get('/booking/:scheduleId', bookingPage);
 router.post('/book', processBookingRequest);
 
-// 3) Confirmation (más específico)
+// Booking confirmation page
 router.get('/confirmation/:confirmationId', confirmationPage);
-
-// 4) Route details (genérico) → SIEMPRE al final
-router.get('/:routeId', routeDetailsPage);
 
 export default router;
